@@ -1,8 +1,7 @@
-package Test;
+package test;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import Data.DataGenerator;
+import data.DataGenerator;
 import lombok.val;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
@@ -25,10 +24,6 @@ public class CardDeliveryTest {
         closeWindow();
     }
 
-    @AfterAll
-    static void tearDownAll(){
-        SelenideLogger.removeListener("allure");
-    }
 
     @Test
     void shouldSuccessfulPlanAndReplanMeeting() {
@@ -189,7 +184,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestUnsuccessOrderIfCityNotFromList() {
-        val invalidUser = DataGenerator.InvalidRegistration.generateInvalidUser("ru");
+        val invalidUser = DataGenerator.Registration.generateInvalidUserCityBy("ru");
         int daysToAddForFirstMeeting = 3;
         $("[data-test-id='city'] .input__control").setValue(invalidUser.getCity());
         $("[data-test-id='date'] .input__control").doubleClick();
@@ -207,7 +202,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestUnsuccessOrderIfNameInEnglish() {
-        val invalidUser = DataGenerator.InvalidNameRegistration.generateInvalidUser("ru");
+        val invalidUser = DataGenerator.Registration.generateInvalidUserNameUs("ru");
         int daysToAddForFirstMeeting = 3;
         $("[data-test-id='city'] .input__control").setValue(invalidUser.getCity());
         $("[data-test-id='date'] .input__control").doubleClick();
@@ -225,7 +220,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestUnsuccessOrderIfTelNotContainsElevenFigures() {
-        val invalidUser = DataGenerator.InvalidRegistrationPhone.generateInvalidUser("ru");
+        val invalidUser = DataGenerator.Registration.generateInvalidUserPhone("ru");
         int daysToAddForFirstMeeting = 3;
         $("[data-test-id='city'] .input__control").setValue(invalidUser.getCity());
         $("[data-test-id='date'] .input__control").doubleClick();
@@ -242,7 +237,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestUnsuccessOrderIfTelNotStartWithPlusSeven() {
-        val invalidUser = DataGenerator.InvalidRegistrationPhoneStarts.generateInvalidUser("ru");
+        val invalidUser = DataGenerator.Registration.generateInvalidUserPhoneStarts("ru");
         int daysToAddForFirstMeeting = 3;
         $("[data-test-id='city'] .input__control").setValue(invalidUser.getCity());
         $("[data-test-id='date'] .input__control").doubleClick();
@@ -293,7 +288,7 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestSuccessOrderIfNameWithLetterYo() {
-        val invalidUser = DataGenerator.InvalidNameRegistrationWithYo.generateInvalidUser("ru");
+        val invalidUser = DataGenerator.Registration.generateInvalidUserNameWithYo("ru");
         int daysToAddForFirstMeeting = 3;
         $("[data-test-id='city'] .input__control").setValue(invalidUser.getCity());
         $("[data-test-id='date'] .input__control").doubleClick();
